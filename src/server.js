@@ -15,14 +15,13 @@ const routes = [
 const init = async () => {
   const server = Hapi.server({
     port: 5000,
-    host: 'localhost',
-    routes: {
-      cors: {
-        origin: ['*'], // Mengizinkan CORS dari semua sumber
-      },
+    host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
+  routes: {
+    cors: {
+      origin: ['*'],
     },
-  });
-
+  },
+});
   // Daftarkan routes ke server
   server.route(routes);
 
